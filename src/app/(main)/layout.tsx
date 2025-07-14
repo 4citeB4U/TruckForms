@@ -11,11 +11,11 @@ export default function MainLayout({
   return (
     <BrandingProvider>
       <SidebarProvider>
-        <div className="flex min-h-screen w-full flex-col">
+        <div className="flex h-screen w-full">
           <SidebarNav />
-          <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
+          <div className="flex flex-1 flex-col">
             <Header />
-            <main className="flex-1 p-4 sm:px-6 sm:py-0 md:gap-8">
+            <main className="flex-1 overflow-y-auto p-4 sm:px-6 sm:py-8 md:gap-8">
               {children}
             </main>
           </div>

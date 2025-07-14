@@ -36,14 +36,15 @@ export function SidebarNav() {
                   {category.items.map((item) => (
                     <SidebarMenuItem key={`${item.href}-${item.title}`}>
                       <SidebarMenuButton
-                        as={Link}
-                        href={item.href}
+                        asChild
                         isActive={pathname === item.href}
                         tooltip={{ children: item.title }}
                         className="justify-start"
                       >
-                        <item.icon />
-                        <span>{item.title}</span>
+                        <Link href={item.href}>
+                          <item.icon />
+                          <span>{item.title}</span>
+                        </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   ))}
