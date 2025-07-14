@@ -1,0 +1,88 @@
+'use client';
+
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarGroupContent,
+} from '@/components/ui/sidebar';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { usePathname } from 'next/navigation';
+import { FORM_CATEGORIES } from '@/lib/constants';
+import { LogOut, Settings } from 'lucide-react';
+import Link from 'next/link';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+
+export function SidebarNav() {
+  const pathname = usePathname();
+
+  return (
+    <Sidebar className="border-r no-print">
+      <SidebarHeader>
+        {/* Placeholder for a logo or app name in sidebar header */}
+      </SidebarHeader>
+      <SidebarContent className="p-0">
+        <Accordion type="multiple" defaultValue={['Driver']} className="w-full">
+          {FORM_CATEGORIES.map((category) => (
+            <AccordionItem value={category.title} key={category.title} className="border-b-0">
+              <AccordionTrigger className="px-4 py-2 text-sm font-semibold text-muted-foreground hover:no-underline hover:bg-accent rounded-md">
+                {category.title}
+              </AccordionTrigger>
+              <AccordionContent className="pb-0">
+                <SidebarMenu className="py-2 pl-4">
+                  {category.items.map((item) => (
+                    <SidebarMenuItem key={item.href}>
+                      <Link href={item.href} legacyBehavior passHref>
+                        <SidebarMenuButton
+                          asChild
+                          isActive={pathname === item.href}
+                          tooltip={{ children: item.title }}
+                          className="justify-start"
+                        >
+                          <a>
+                            <item.icon />
+                            <span>{item.title}</span>
+                          </a>
+                        </SidebarMenuButton>
+                      </Link>
+                    </SidebarMenuItem>
+                  ))}
+                </SidebarMenu>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </SidebarContent>
+      <SidebarFooter>
+        <Separator className="my-2" />
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              tooltip={{ children: 'Settings' }}
+              className="justify-start"
+            >
+              <Settings />
+              <span>Settings</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              tooltip={{ children: 'Logout' }}
+              className="justify-start"
+            >
+              <LogOut />
+              <span>Logout</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
+    </Sidebar>
+  );
+}
