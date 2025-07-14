@@ -38,7 +38,7 @@ export function SidebarNav() {
               <AccordionContent className="pb-0">
                 <SidebarMenu className="py-2 pl-4">
                   {category.items.map((item) => (
-                    <SidebarMenuItem key={item.href}>
+                    <SidebarMenuItem key={`${item.href}-${item.title}`}>
                       <Link href={item.href} legacyBehavior passHref>
                         <SidebarMenuButton
                           asChild
