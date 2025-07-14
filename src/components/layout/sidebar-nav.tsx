@@ -8,11 +8,7 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarFooter,
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarGroupContent,
 } from '@/components/ui/sidebar';
-import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { usePathname } from 'next/navigation';
 import { FORM_CATEGORIES } from '@/lib/constants';
@@ -39,19 +35,16 @@ export function SidebarNav() {
                 <SidebarMenu className="py-2 pl-4">
                   {category.items.map((item) => (
                     <SidebarMenuItem key={`${item.href}-${item.title}`}>
-                      <Link href={item.href} legacyBehavior passHref>
-                        <SidebarMenuButton
-                          asChild
-                          isActive={pathname === item.href}
-                          tooltip={{ children: item.title }}
-                          className="justify-start"
-                        >
-                          <a>
-                            <item.icon />
-                            <span>{item.title}</span>
-                          </a>
-                        </SidebarMenuButton>
-                      </Link>
+                      <SidebarMenuButton
+                        as={Link}
+                        href={item.href}
+                        isActive={pathname === item.href}
+                        tooltip={{ children: item.title }}
+                        className="justify-start"
+                      >
+                        <item.icon />
+                        <span>{item.title}</span>
+                      </SidebarMenuButton>
                     </SidebarMenuItem>
                   ))}
                 </SidebarMenu>
