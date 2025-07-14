@@ -40,7 +40,7 @@ export function SidebarNav() {
                 <SidebarMenu className="py-2 pl-4">
                   {category.items.map((item) => (
                      <SidebarMenuItem key={`${item.href}-${item.title}`}>
-                      <Link href={item.href} passHref>
+                      <Link href={item.href}>
                         <SidebarMenuButton
                           isActive={pathname === item.href}
                           tooltip={{ children: item.title }}
@@ -62,7 +62,7 @@ export function SidebarNav() {
         <Separator className="my-2" />
         <SidebarMenu>
           <SidebarMenuItem>
-             <Link href="#" passHref>
+             <Link href="#">
                 <SidebarMenuButton
                 tooltip={{ children: 'Settings' }}
                 className="justify-start"
@@ -73,7 +73,7 @@ export function SidebarNav() {
             </Link>
           </SidebarMenuItem>
           <SidebarMenuItem>
-             <Link href="#" passHref>
+             <Link href="#">
                 <SidebarMenuButton
                 tooltip={{ children: 'Logout' }}
                 className="justify-start"
