@@ -19,13 +19,17 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 export function SidebarNav() {
   const pathname = usePathname();
 
+  const defaultActiveCategory = FORM_CATEGORIES.find(category => 
+    category.items.some(item => pathname.startsWith(item.href))
+  )?.title;
+
   return (
     <Sidebar className="border-r no-print">
       <SidebarHeader>
         {/* Placeholder for a logo or app name in sidebar header */}
       </SidebarHeader>
       <SidebarContent className="p-0">
-        <Accordion type="multiple" defaultValue={['Driver']} className="w-full">
+        <Accordion type="multiple" defaultValue={defaultActiveCategory ? [defaultActiveCategory] : ['Driver']} className="w-full">
           {FORM_CATEGORIES.map((category) => (
             <AccordionItem value={category.title} key={category.title} className="border-b-0">
               <AccordionTrigger className="px-4 py-2 text-sm font-semibold text-muted-foreground hover:no-underline hover:bg-accent rounded-md">
@@ -35,17 +39,17 @@ export function SidebarNav() {
                 <SidebarMenu className="py-2 pl-4">
                   {category.items.map((item) => (
                     <SidebarMenuItem key={`${item.href}-${item.title}`}>
-                      <SidebarMenuButton
-                        asChild
-                        isActive={pathname === item.href}
-                        tooltip={{ children: item.title }}
-                        className="justify-start"
-                      >
-                        <Link href={item.href}>
+                      <Link href={item.href} passHref legacyBehavior>
+                        <SidebarMenuButton
+                          as="a"
+                          isActive={pathname === item.href}
+                          tooltip={{ children: item.title }}
+                          className="justify-start"
+                        >
                           <item.icon />
                           <span>{item.title}</span>
-                        </Link>
-                      </SidebarMenuButton>
+                        </SidebarMenuButton>
+                      </Link>
                     </SidebarMenuItem>
                   ))}
                 </SidebarMenu>
