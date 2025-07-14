@@ -1,3 +1,4 @@
+// src/components/layout/sidebar-nav.tsx
 'use client';
 
 import {
@@ -38,10 +39,9 @@ export function SidebarNav() {
               <AccordionContent className="pb-0">
                 <SidebarMenu className="py-2 pl-4">
                   {category.items.map((item) => (
-                    <SidebarMenuItem key={`${item.href}-${item.title}`}>
-                      <Link href={item.href} passHref legacyBehavior>
+                     <SidebarMenuItem key={`${item.href}-${item.title}`}>
+                      <Link href={item.href} passHref>
                         <SidebarMenuButton
-                          as="a"
                           isActive={pathname === item.href}
                           tooltip={{ children: item.title }}
                           className="justify-start"
@@ -62,24 +62,32 @@ export function SidebarNav() {
         <Separator className="my-2" />
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton
-              tooltip={{ children: 'Settings' }}
-              className="justify-start"
-            >
-              <Settings />
-              <span>Settings</span>
-            </SidebarMenuButton>
+             <Link href="#" passHref>
+                <SidebarMenuButton
+                tooltip={{ children: 'Settings' }}
+                className="justify-start"
+                >
+                <Settings />
+                <span>Settings</span>
+                </SidebarMenuButton>
+            </Link>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton
-              tooltip={{ children: 'Logout' }}
-              className="justify-start"
-            >
-              <LogOut />
-              <span>Logout</span>
-            </SidebarMenuButton>
+             <Link href="#" passHref>
+                <SidebarMenuButton
+                tooltip={{ children: 'Logout' }}
+                className="justify-start"
+                >
+                <LogOut />
+                <span>Logout</span>
+                </SidebarMenuButton>
+             </Link>
           </SidebarMenuItem>
         </SidebarMenu>
+        <div className="p-4 text-center text-xs text-muted-foreground">
+            <p>Leeway forms.</p>
+            <p>By Rapid Web Development.</p>
+        </div>
       </SidebarFooter>
     </Sidebar>
   );

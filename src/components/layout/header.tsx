@@ -1,3 +1,4 @@
+// src/components/layout/header.tsx
 'use client';
 
 import { SidebarTrigger } from '@/components/ui/sidebar';
@@ -8,13 +9,17 @@ import { Truck, Building2 } from 'lucide-react';
 import Image from 'next/image';
 import { useBranding } from '@/context/branding-context';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { BrandingCustomizer } from './branding-customizer';
+import { useState } from 'react';
 
 
 export function Header() {
   const { logo } = useBranding();
   const isMobile = useIsMobile();
+  const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
   
   return (
+    <>
     <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 no-print">
       <div className="flex items-center gap-2">
         {isMobile && <SidebarTrigger />}
@@ -28,8 +33,7 @@ export function Header() {
         <h1 className="font-headline text-xl font-semibold tracking-tight">TruckForms</h1>
       </div>
       <div className="ml-auto flex items-center gap-4">
-        {/* Placeholder for branding customizer */}
-        <Button variant="outline" size="sm">
+        <Button variant="outline" size="sm" onClick={() => setIsCustomizerOpen(true)}>
             <Building2 className="mr-2 h-4 w-4" />
             Customize Branding
         </Button>
@@ -54,5 +58,7 @@ export function Header() {
         </DropdownMenu>
       </div>
     </header>
+    <BrandingCustomizer open={isCustomizerOpen} onOpenChange={setIsCustomizerOpen} />
+    </>
   );
 }
