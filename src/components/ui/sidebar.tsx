@@ -69,6 +69,8 @@ const SidebarProvider = React.forwardRef<
   ) => {
     const isMobile = useIsMobile()
     const [openMobile, setOpenMobile] = React.useState(false)
+    const [isMounted, setIsMounted] = React.useState(false);
+
 
     // This is the internal state of the sidebar.
     // We use openProp and setOpenProp for control from outside the component.
@@ -88,6 +90,10 @@ const SidebarProvider = React.forwardRef<
       },
       [setOpenProp, open]
     )
+
+    React.useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     // Helper to toggle the sidebar.
     const toggleSidebar = React.useCallback(() => {
@@ -121,12 +127,12 @@ const SidebarProvider = React.forwardRef<
         state,
         open,
         setOpen,
-        isMobile,
+        isMobile: isMounted ? isMobile : false,
         openMobile,
         setOpenMobile,
         toggleSidebar,
       }),
-      [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
+      [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar, isMounted]
     )
 
     return (
@@ -550,6 +556,7 @@ const SidebarMenuButton = React.forwardRef<
       size = "default",
       tooltip,
       className,
+      asChild,
       ...props
     },
     ref
@@ -563,6 +570,7 @@ const SidebarMenuButton = React.forwardRef<
         data-size={size}
         data-active={isActive}
         className={cn(sidebarMenuButtonVariants({ variant, size }), className)}
+        asChild={asChild}
         {...props}
       />
     )
