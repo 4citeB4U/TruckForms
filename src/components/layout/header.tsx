@@ -5,18 +5,21 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Truck, Building2 } from 'lucide-react';
+import { Truck, Building2, Bot } from 'lucide-react';
 import Image from 'next/image';
 import { useBranding } from '@/context/branding-context';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { BrandingCustomizer } from './branding-customizer';
 import { useState } from 'react';
+import { CommandBar } from './command-bar';
+import { useCommand } from '@/context/command-context';
 
 
 export function Header() {
   const { logo } = useBranding();
   const isMobile = useIsMobile();
   const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
+  const { setCommandOpen } = useCommand();
   
   return (
     <>
@@ -33,6 +36,10 @@ export function Header() {
         <h1 className="font-headline text-xl font-semibold tracking-tight">TruckForms</h1>
       </div>
       <div className="ml-auto flex items-center gap-4">
+        <Button variant="outline" size="sm" onClick={() => setCommandOpen(true)}>
+            <Bot className="mr-2 h-4 w-4" />
+            Agent Lee
+        </Button>
         <Button variant="outline" size="sm" onClick={() => setIsCustomizerOpen(true)}>
             <Building2 className="mr-2 h-4 w-4" />
             Customize Branding
@@ -59,6 +66,7 @@ export function Header() {
       </div>
     </header>
     <BrandingCustomizer open={isCustomizerOpen} onOpenChange={setIsCustomizerOpen} />
+    <CommandBar />
     </>
   );
 }

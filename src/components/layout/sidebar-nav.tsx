@@ -39,16 +39,16 @@ export function SidebarNav() {
               <AccordionContent className="pb-0">
                 <SidebarMenu className="py-2 pl-4">
                   {category.items.map((item) => (
-                     <SidebarMenuItem key={`${item.href}-${item.title}`}>
-                      <Link href={item.href}>
-                        <SidebarMenuButton
-                          isActive={pathname === item.href}
-                          tooltip={{ children: item.title }}
-                          className="justify-start"
-                        >
-                          <item.icon />
-                          <span>{item.title}</span>
-                        </SidebarMenuButton>
+                     <SidebarMenuItem key={item.href}>
+                      <Link href={item.href} legacyBehavior={false} passHref>
+                          <SidebarMenuButton
+                            isActive={pathname === item.href}
+                            tooltip={{ children: item.title }}
+                            className="justify-start"
+                          >
+                            <item.icon />
+                            <span>{item.title}</span>
+                          </SidebarMenuButton>
                       </Link>
                     </SidebarMenuItem>
                   ))}
