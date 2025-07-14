@@ -31,6 +31,21 @@ import {
   BadgePercent,
   Receipt,
   GraduationCap,
+  ShieldAlert,
+  Shield,
+  FileQuestion,
+  UserCog,
+  FileHeart,
+  FileClock,
+  Car,
+  Bell,
+  MessageCircle,
+  Phone,
+  ListChecks,
+  FileUp,
+  Paperclip,
+  Pencil,
+  BookCopy,
 } from 'lucide-react';
 import type { NavItemGroup, NavItem } from '@/lib/types';
 
@@ -38,7 +53,7 @@ export const FORM_CATEGORIES: NavItemGroup[] = [
   {
     title: 'Driver',
     items: [
-      {
+       {
         title: 'Bill of Lading (BOL)',
         href: '/forms/bill-of-lading',
         icon: FileText,
@@ -47,7 +62,7 @@ export const FORM_CATEGORIES: NavItemGroup[] = [
       },
       {
         title: 'Driver’s Daily Log (HOS)',
-        href: '#',
+        href: '/forms/drivers-daily-log',
         icon: ClipboardList,
         role: 'Driver',
         description: 'Track Hours of Service for compliance.',
@@ -94,6 +109,13 @@ export const FORM_CATEGORIES: NavItemGroup[] = [
         role: 'Driver',
         description: 'Submit and track medical certification.',
       },
+      {
+        title: 'Violation/Warning Notice',
+        href: '#',
+        icon: ShieldAlert,
+        role: 'Driver',
+        description: 'Acknowledge receipt of a violation or warning.'
+      }
     ],
   },
   {
@@ -135,12 +157,33 @@ export const FORM_CATEGORIES: NavItemGroup[] = [
         description: 'Track driver availability and status.',
       },
       {
+        title: 'Customer Contact Sheet',
+        href: '#',
+        icon: Contact,
+        description: 'Log customer contact information and notes.',
+        role: 'Dispatcher'
+      },
+      {
         title: 'Load Confirmation Sheet',
         href: '#',
         icon: FileCheck2,
         role: 'Dispatcher',
         description: 'Confirm load details with shippers/brokers.',
       },
+      {
+        title: 'Detention/Wait Time Report',
+        href: '#',
+        icon: Timer,
+        description: 'Track and report waiting times at facilities.',
+        role: 'Dispatcher'
+      },
+      {
+        title: 'Driver Handover Checklist',
+        href: '#',
+        icon: ClipboardCheck,
+        description: 'Ensure smooth handover between drivers.',
+        role: 'Dispatcher'
+      }
     ],
   },
   {
@@ -160,6 +203,13 @@ export const FORM_CATEGORIES: NavItemGroup[] = [
         role: 'Driver Manager',
         description: 'Regular assessment of driver performance.',
       },
+       {
+        title: 'Incident/Accident Review',
+        href: '#',
+        icon: FileQuestion,
+        description: 'Internal review of reported incidents.',
+        role: 'Driver Manager'
+      },
       {
         title: 'Disciplinary Action Log',
         href: '#',
@@ -168,12 +218,33 @@ export const FORM_CATEGORIES: NavItemGroup[] = [
         description: 'Document coaching or corrective actions.',
       },
       {
+        title: 'Driver File Update Form',
+        href: '#',
+        icon: UserCog,
+        description: 'Log updates to a driver\'s file.',
+        role: 'Driver Manager'
+      },
+      {
         title: 'Safety Meeting Attendance',
         href: '#',
         icon: ClipboardCheck,
         role: 'Driver Manager',
         description: 'Record attendance for safety meetings.',
       },
+      {
+        title: 'Driver Complaint/Feedback',
+        href: '#',
+        icon: MessageCircle,
+        description: 'Log and address driver feedback.',
+        role: 'Driver Manager'
+      },
+      {
+        title: 'Injury/Illness Report',
+        href: '#',
+        icon: FileHeart,
+        description: 'Official report for any work-related injuries.',
+        role: 'Driver Manager'
+      }
     ],
   },
   {
@@ -201,6 +272,13 @@ export const FORM_CATEGORIES: NavItemGroup[] = [
         description: 'Summarize loads and payments received.',
       },
       {
+        title: 'Insurance Certificate Submission',
+        href: '#',
+        icon: FileUp,
+        description: 'Submit proof of insurance.',
+        role: 'Owner-Operator'
+      },
+      {
         title: 'IFTA Fuel Tax Report',
         href: '#',
         icon: BadgePercent,
@@ -214,6 +292,34 @@ export const FORM_CATEGORIES: NavItemGroup[] = [
         role: 'Owner-Operator',
         description: 'Manage lease agreements.',
       },
+      {
+        title: 'Tax Forms (1099/W-9)',
+        href: '#',
+        icon: BookCopy,
+        description: 'Submit and manage tax documentation.',
+        role: 'Owner-Operator'
+      },
+      {
+        title: 'Operating Authority/MC Number',
+        href: '#',
+        icon: FileBadge,
+        description: 'Application or record of operating authority.',
+        role: 'Owner-Operator'
+      },
+      {
+        title: 'Equipment Ownership/Title',
+        href: '#',
+        icon: Car,
+        description: 'Documentation for equipment titles.',
+        role: 'Owner-Operator'
+      },
+      {
+        title: 'Business License/Permits',
+        href: '#',
+        icon: Scroll,
+        description: 'Manage business licenses and permits.',
+        role: 'Owner-Operator'
+      }
     ],
   },
   {
@@ -240,6 +346,34 @@ export const FORM_CATEGORIES: NavItemGroup[] = [
         role: 'Teacher/Trainer',
         description: 'Assess trainee comprehension and performance.',
       },
+      {
+        title: 'Certification Completion Report',
+        href: '#',
+        icon: FileCheck2,
+        description: 'Confirm trainees have met certification requirements.',
+        role: 'Teacher/Trainer'
+      },
+      {
+        title: 'Trainee Feedback/Survey',
+        href: '#',
+        icon: MessageSquare,
+        description: 'Collect feedback from trainees.',
+        role: 'Teacher/Trainer'
+      },
+      {
+        title: 'Incident/Observation Report',
+        href: '#',
+        icon: Pencil,
+        description: 'Document issues or events during training.',
+        role: 'Teacher/Trainer'
+      },
+       {
+        title: 'Lesson Plan Submission',
+        href: '#',
+        icon: Paperclip,
+        description: 'Submit and track lesson plans.',
+        role: 'Teacher/Trainer'
+      }
     ],
   },
 ];
@@ -256,7 +390,7 @@ export const QUICK_ACTIONS: NavItem[] = [
     },
     {
         title: 'New HOS Log',
-        href: '#',
+        href: '/forms/drivers-daily-log',
         icon: FilePlus2,
         description: 'Log your daily hours of service.'
     },
