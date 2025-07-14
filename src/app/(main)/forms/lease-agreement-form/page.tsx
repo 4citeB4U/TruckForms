@@ -1,4 +1,4 @@
-import { LeaseAgreementForm } from "@/components/forms/lease-agreement-form";
+import { LeaseAgreementForm } from "@/components/forms/lease-agreement-form-form";
 
 export default function LeaseAgreementFormPage() {
     return (

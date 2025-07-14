@@ -1,4 +1,4 @@
-import { TrainingEvaluationForm } from "@/components/forms/training-evaluation-form";
+import { TrainingEvaluationForm } from "@/components/forms/training-evaluation-form-form";
 
 export default function TrainingEvaluationFormPage() {
     return (

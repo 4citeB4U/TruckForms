@@ -1,4 +1,4 @@
-import { DriverFileUpdateForm } from "@/components/forms/driver-file-update-form";
+import { DriverFileUpdateForm } from "@/components/forms/driver-file-update-form-form";
 
 export default function DriverFileUpdateFormPage() {
     return (
