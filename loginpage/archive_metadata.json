@@ -1,0 +1,7 @@
+{
+  "name": "TruckForms Login with Agent Lee",
+  "description": "A login interface for a logistics application featuring 'Agent Lee', an AI assistant that responds to voice commands and performs system diagnostics.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

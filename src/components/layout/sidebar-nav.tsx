@@ -13,7 +13,7 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { usePathname } from 'next/navigation';
 import { FORM_CATEGORIES } from '@/lib/constants';
-import { LogOut, Settings } from 'lucide-react';
+// import { Settings } from 'lucide-react';
 import Link from 'next/link';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
@@ -39,16 +39,16 @@ export function SidebarNav() {
               <AccordionContent className="pb-0">
                 <SidebarMenu className="py-2 pl-4">
                   {category.items.map((item) => (
-                     <SidebarMenuItem key={item.href}>
+                    <SidebarMenuItem key={item.href}>
                       <Link href={item.href} legacyBehavior={false} passHref>
-                          <SidebarMenuButton
-                            isActive={pathname === item.href}
-                            tooltip={{ children: item.title }}
-                            className="justify-start"
-                          >
-                            <item.icon />
-                            <span>{item.title}</span>
-                          </SidebarMenuButton>
+                        <SidebarMenuButton
+                          isActive={pathname === item.href}
+                          tooltip={{ children: item.title }}
+                          className="justify-start"
+                        >
+                          <item.icon />
+                          <span>{item.title}</span>
+                        </SidebarMenuButton>
                       </Link>
                     </SidebarMenuItem>
                   ))}
@@ -58,37 +58,9 @@ export function SidebarNav() {
           ))}
         </Accordion>
       </SidebarContent>
-      <SidebarFooter>
-        <Separator className="my-2" />
-        <SidebarMenu>
-          <SidebarMenuItem>
-             <Link href="#">
-                <SidebarMenuButton
-                tooltip={{ children: 'Settings' }}
-                className="justify-start"
-                >
-                <Settings />
-                <span>Settings</span>
-                </SidebarMenuButton>
-            </Link>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-             <Link href="#">
-                <SidebarMenuButton
-                tooltip={{ children: 'Logout' }}
-                className="justify-start"
-                >
-                <LogOut />
-                <span>Logout</span>
-                </SidebarMenuButton>
-             </Link>
-          </SidebarMenuItem>
-        </SidebarMenu>
-        <div className="p-4 text-center text-xs text-muted-foreground">
-            <p>Leeway forms.</p>
-            <p>By Rapid Web Development.</p>
-        </div>
-      </SidebarFooter>
+      <div className="p-4 text-center text-xs text-muted-foreground">
+        Leeway Trucker forms.<br />By Rapid Web Development.
+      </div>
     </Sidebar>
   );
 }

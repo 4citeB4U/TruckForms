@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardContent,
@@ -11,9 +13,17 @@ import { ArrowRight, FilePlus2 } from 'lucide-react';
 import { ALL_FORMS, QUICK_ACTIONS } from '@/lib/constants';
 import { Badge } from '@/components/ui/badge';
 
+import { AuthGate } from './AuthGate';
+import { CompanyOnboarding } from '@/auth/CompanyOnboarding';
+import { InviteUserForm } from '@/auth/InviteUserForm';
+import { ListCompanyForms } from '@/auth/ListCompanyForms';
+import { AgentLeeAssistant } from '@/components/AgentLeeAssistant';
+
+
 export default function DashboardPage() {
   return (
     <div className="flex flex-col gap-8">
+      {/* Agent Lee AI Assistant Narrator */}
       <div>
         <h1 className="font-headline text-3xl font-bold tracking-tight">
           Welcome to TruckForms
@@ -21,8 +31,30 @@ export default function DashboardPage() {
         <p className="text-muted-foreground">
           Your central hub for managing logistics and trucking documentation.
         </p>
+        {/* Agent Lee Onboarding/Narration */}
+        <div className="mt-4">
+          {/* Import AgentLeeAssistant at top of file */}
+          <AgentLeeAssistant />
+        </div>
       </div>
 
+      {/* Company Onboarding */}
+      <section>
+        <h2 className="font-headline text-xl font-semibold mb-2">Create Your Company</h2>
+        <div className="mb-6">
+          <CompanyOnboarding />
+        </div>
+      </section>
+
+      {/* Invite Users */}
+      <section>
+        <h2 className="font-headline text-xl font-semibold mb-2">Invite Team Members</h2>
+        <div className="mb-6">
+          <InviteUserForm />
+        </div>
+      </section>
+
+      {/* Quick Actions */}
       <section>
         <h2 className="font-headline text-2xl font-semibold tracking-tight mb-4">Quick Actions</h2>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -45,6 +77,15 @@ export default function DashboardPage() {
         </div>
       </section>
 
+      {/* List Company Forms */}
+      <section>
+        <h2 className="font-headline text-xl font-semibold mb-2">Company Form Submissions</h2>
+        <div className="mb-6">
+          <ListCompanyForms />
+        </div>
+      </section>
+
+      {/* All Forms */}
       <section>
         <h2 className="font-headline text-2xl font-semibold tracking-tight mb-4">All Forms</h2>
         <Card>

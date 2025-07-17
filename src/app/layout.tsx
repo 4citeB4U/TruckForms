@@ -1,39 +1,34 @@
+
 import type { Metadata } from 'next';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
+import { AuthProvider } from '@/auth/AuthProvider';
+import { CompanyProvider } from '@/auth/CompanyContext';
 
 export const metadata: Metadata = {
   title: 'TruckForms',
   description: 'Modern forms engine for the logistics industry.',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // Only redirect to login if not already on login page
+  if (typeof window !== 'undefined') {
+    const isLoginPage = window.location.pathname === '/login';
+    if (!isLoginPage) {
+      window.location.href = '/login';
+      return null;
+    }
+  }
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=PT+Sans:wght@400;700&family=Source+Code+Pro&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body
-        className={cn(
-          'min-h-screen bg-background font-body antialiased',
-        )}
-      >
-        {children}
-        <Toaster />
+    <html lang="en">
+      <body className="bg-white text-gray-900">
+        <AuthProvider>
+          <CompanyProvider>
+            {children}
+            <Toaster />
+          </CompanyProvider>
+        </AuthProvider>
       </body>
     </html>
   );

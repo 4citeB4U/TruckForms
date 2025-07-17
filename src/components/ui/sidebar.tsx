@@ -573,7 +573,10 @@ const SidebarMenuButton = React.forwardRef<
         data-active={isActive}
         variant={variant}
         size={size}
-        className={cn(sidebarMenuButtonVariants({ variant, size }), className)}
+        className={cn(sidebarMenuButtonVariants({
+          variant: variant === "default" || variant === "outline" ? variant : "default",
+          size: size === "lg" || size === "sm" || size === "default" ? size : "default"
+        }), className)}
         asChild={asChild}
         {...props}
       />

@@ -8,6 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Truck, Building2, Bot } from 'lucide-react';
 import Image from 'next/image';
 import { useBranding } from '@/context/branding-context';
+import { useAuth } from '@/auth/AuthProvider';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { BrandingCustomizer } from './branding-customizer';
 import { useState } from 'react';
@@ -17,6 +18,7 @@ import { useCommand } from '@/context/command-context';
 
 export function Header() {
   const { logo } = useBranding();
+  const { user } = useAuth();
   const isMobile = useIsMobile();
   const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
   const { setCommandOpen } = useCommand();
@@ -24,7 +26,27 @@ export function Header() {
   return (
     <>
     <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 no-print">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-4">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="secondary" size="icon" className="rounded-full">
+              <Avatar>
+                <AvatarImage src={user?.photoURL || "https://placehold.co/32x32.png"} alt={user?.email || "@user"} />
+                <AvatarFallback>{user?.email ? user.email[0].toUpperCase() : "U"}</AvatarFallback>
+              </Avatar>
+              <span className="sr-only">Toggle user menu</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start">
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Admin</DropdownMenuItem>
+            <DropdownMenuItem>Settings (coming soon: profile, notifications, preferences)</DropdownMenuItem>
+            <DropdownMenuItem>Support</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Logout</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
         {isMobile && <SidebarTrigger />}
         {logo ? (
           <Image src={logo} alt="Company Logo" width={32} height={32} className="h-8 w-8 rounded-md object-contain" />
@@ -44,25 +66,6 @@ export function Header() {
             <Building2 className="mr-2 h-4 w-4" />
             Customize Branding
         </Button>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="secondary" size="icon" className="rounded-full">
-              <Avatar>
-                <AvatarImage src="https://placehold.co/32x32.png" alt="@user" />
-                <AvatarFallback>U</AvatarFallback>
-              </Avatar>
-              <span className="sr-only">Toggle user menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuItem>Support</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
       </div>
     </header>
     <BrandingCustomizer open={isCustomizerOpen} onOpenChange={setIsCustomizerOpen} />

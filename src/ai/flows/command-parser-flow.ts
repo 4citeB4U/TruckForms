@@ -22,7 +22,7 @@ export type ParseCommandInput = z.infer<typeof ParseCommandInputSchema>;
 const ParseCommandOutputSchema = z.object({
   action: z.enum(['navigate', 'unknown']).describe("The type of action to perform."),
   details: z.object({
-    slug: z.enum([...formSlugs, ''] as [string, ...string[]]).optional().describe('The unique slug of the form to navigate to.'),
+    slug: z.enum((formSlugs.length > 0 ? formSlugs : ['default-slug']) as [string, ...string[]]).optional().describe('The unique slug of the form to navigate to.'),
     reasoning: z.string().describe('A brief explanation of why this action was chosen.')
   })
 });
@@ -62,15 +62,22 @@ const commandParserFlow = ai.defineFlow(
   },
   async (input) => {
     const { output } = await prompt(input);
-    if (!output) {
+    if (!output || (output.action !== 'navigate' && output.action !== 'unknown')) {
       return {
-        action: 'unknown',
+        action: 'unknown' as 'unknown',
         details: {
             slug: '',
             reasoning: 'AI model did not return a valid output.'
         }
-      }
+      };
     }
-    return output;
+    // Only allow valid actions and typecast
+    return {
+      action: output.action as 'navigate' | 'unknown',
+      details: {
+        slug: output.details?.slug ?? '',
+        reasoning: output.details?.reasoning ?? ''
+      }
+    };
   }
 );

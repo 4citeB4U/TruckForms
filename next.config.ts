@@ -20,7 +20,7 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     // This is to allow cross-origin requests from the development environment.
-    allowedDevOrigins: ["https://*.cloudworkstations.dev", "https://*.firebase.studio"],
+    // allowedDevOrigins removed (invalid property)
   },
 };
 
